@@ -138,11 +138,11 @@ def main():
             search_results = search_client.search(
                 collection_name=collection_name,
                 query_vector=query_embedding,
-                limit=10,
+                limit=3,
             )
             st.write(question)
             st.write(search_results)
-            inputs = {"question": question, "result_qdrant": search_results.payload['text']}
+            inputs = {"question": question, "result_qdrant": search_results}
             result = chain_1.run(inputs)
             st.write(result)
         else:
