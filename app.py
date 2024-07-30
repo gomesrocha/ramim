@@ -143,8 +143,7 @@ def main():
                 query_vector=query_embedding,
                 limit=10,
             )
-            print(question)
-            print(search_results)
+
             inputs = {"question": question, "result_qdrant": search_results}
             result = chain_1.run(inputs)
             st.write(result)
