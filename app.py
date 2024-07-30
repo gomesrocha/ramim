@@ -8,7 +8,6 @@ from sentence_transformers import SentenceTransformer
 import base64
 import google.generativeai as gemini_client
 import pandas as pd
-from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import Distance, PointStruct, VectorParams
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -16,7 +15,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 
 import os
-from dotenv import load_dotenv  
+from dotenv import load_dotenv
 
 load_dotenv()
 g_api_key = os.getenv("GOOGLE_API_KEY")
@@ -30,18 +29,17 @@ llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=g_api_key)
 # Inicializando o cliente Qdrant
 collection_name = "db_rag_metric"
 search_client = QdrantClient(
-    url="https://d58764bf-41d0-4544-8b0d-87ffc570331d.us-east4-0.gcp.cloud.qdrant.io:6333", 
+    url="https://d58764bf-41d0-4544-8b0d-87ffc570331d.us-east4-0.gcp.cloud.qdrant.io:6333",
     api_key=q_api_key,
 )
-
 
 # Inicializando os embeddings necessários
 embeddings = SentenceTransformer('all-MiniLM-L6-v2')
 
-#Criação do prompt
-prompt_template= "Seu nome é Ramin e você é uma Engenheira de Software, \
+# Criação do prompt
+prompt_template = "Seu nome é Ramin e você é uma Engenheira de Software, \
 responda a pergunta {question} com base nos dados {result_qdrant} e explique, \
-de forma humanizada os pontos relacionado aos dados retornado, se possível, forneça uma tabela com os dados de resultados ao fina e se possível, como aplicar as métricasl"
+de forma humanizada os pontos relacionados aos dados retornados, se possível, forneça uma tabela com os dados de resultados ao final e se possível, como aplicar as métricas."
 
 prompt = PromptTemplate(
     input_variables=["question", "result_qdrant"],
@@ -73,7 +71,7 @@ def img_to_base64(image_path):
 def main():
     """
     Display Streamlit updates and handle the chat interface.
-    """    
+    """
 
     st.markdown(
         """
@@ -110,17 +108,16 @@ def main():
     # Collection selection
     collection_mapping = {
         "Microservices Metrics": "db_rag_metric",
-
     }
-    
+
     # Collection selection
     selected_collection = st.sidebar.selectbox(
         "Escolha a coleção de dados",
         list(collection_mapping.keys())
     )
-    
+
     collection_name = collection_mapping[selected_collection]
-    
+
     st.sidebar.markdown("---")
     st.sidebar.markdown("""
         ### Como interagir com a RAMIN
@@ -128,22 +125,23 @@ def main():
         
         """)
     st.sidebar.markdown("---")
-    
-    
+
     # Interface Streamlit
     st.image("img/bot3.jpeg", width=50)  # Displaying the image as a thumbnail above the text input
 
     question = st.text_input("Pergunte a RAMIN:")
-    
+
     if st.button("Enviar"):
         if question:
-            query_embedding = embeddings.encode([question])[0].tolist()
+            # Desabilitar a barra de progresso
+            query_embedding = embeddings.encode([question], show_progress_bar=False)[0].tolist()
             search_results = search_client.search(
                 collection_name=collection_name,
                 query_vector=query_embedding,
                 limit=10,
             )
-
+            st.write(question)
+            st.write(search_results)
             inputs = {"question": question, "result_qdrant": search_results}
             result = chain_1.run(inputs)
             st.write(result)
