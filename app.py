@@ -39,9 +39,9 @@ search_client = QdrantClient(
 embeddings = SentenceTransformer('all-MiniLM-L6-v2')
 
 #Criação do prompt
-prompt_template= "Seu nome é RIER (Retrieving information from entropy research) e você é uma pesquisadora, \
+prompt_template= "Seu nome é Ramin e você é uma Engenheira de Software, \
 responda a pergunta {question} com base nos dados {result_qdrant} e explique, \
-de forma humanizada os pontos relacionado aos dados retornado, se possível, forneça uma tabela com os dados de resultados ao final"
+de forma humanizada os pontos relacionado aos dados retornado, se possível, forneça uma tabela com os dados de resultados ao fina e se possível, como aplicar as métricasl"
 
 prompt = PromptTemplate(
     input_variables=["question", "result_qdrant"],
