@@ -142,7 +142,7 @@ def main():
             )
             st.write(question)
             st.write(search_results)
-            inputs = {"question": question, "result_qdrant": search_results}
+            inputs = {"question": question, "result_qdrant": search_results.payload['text']}
             result = chain_1.run(inputs)
             st.write(result)
         else:
