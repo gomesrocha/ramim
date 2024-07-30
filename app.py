@@ -154,5 +154,3 @@ def main():
         else:
             st.write("Pergunte a Ramin")
 
-if __name__ == "__main__":
-    main()
