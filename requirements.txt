@@ -1,4 +1,4 @@
-streamlit==1.36.0
+streamlit==1.37.0
 langchain-google-genai==1.0.6
 langchain-qdrant==0.1.1
 langchain-text-splitters==0.2.1
@@ -10,7 +10,7 @@ gitdb==4.0.7
 GitPython==3.1.17
 gunicorn==20.1.0
 Markdown==3.3.4
-protobuf>=3.20.0,<4.0.0
+protobuf>=3.19.5,<4.0.0
 python-dotenv==1.0.1
 qdrant-client==1.10.1
 sentence-transformers==3.0.1
@@ -19,10 +19,9 @@ tiktoken==0.7.0
 tokenizers==0.19.1
 transformers==4.42.3
 grpcio==1.64.1
-grpcio-status==1.62.2
 grpcio-tools==1.64.1
 proto-plus==1.23.0
-google-ai-generativelanguage==0.6.4
+google-ai-generativelanguage==0.6.7
 google-api-core==2.19.0
 google-api-python-client==2.132.0
 google-auth==2.30.0
