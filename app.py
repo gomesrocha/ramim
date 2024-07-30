@@ -123,12 +123,9 @@ def main():
     
     st.sidebar.markdown("---")
     st.sidebar.markdown("""
-        ### Como interagir com a SIA
-        - **Pergunte sobre táticas do Mitre Att&CK**: Digite suas perguntas sobre as táticas do mitre Att&ck, quais estão relacionadas com um determinado sistema etc.
-        - **Pesquisa táticas de ataque**: Use palavras como "exemplo da tática x" para obter informações sobre uma tática.
-        - **Exemplo de interação**: Você pode mostrar táticas relacionadas ao iphone?
-        - **Pesquisa informações vazadas Mantis**: Use palavras como "login" para obter informações sobre logins que vazaram e que o mantis detectou.
-        - **Exemplo de interação para dados do Mantis**:  login, username e password 
+        ### Como interagir com a RAMIN
+        - **Pergunte sobre Métricas para microsserviços **: Digite suas perguntas sobre as métricas de microsserviços e como usar.
+        
         """)
     st.sidebar.markdown("---")
     
@@ -136,7 +133,7 @@ def main():
     # Interface Streamlit
     st.image("img/bot3.jpeg", width=50)  # Displaying the image as a thumbnail above the text input
 
-    question = st.text_input("Pergunte a SIA:")
+    question = st.text_input("Pergunte a RAMIN:")
     
     if st.button("Enviar"):
         if question:
