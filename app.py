@@ -141,7 +141,7 @@ def main():
                 limit=3,
             )
             st.write(question)
-            st.write(search_results)
+            #st.write(search_results)
             inputs = {"question": question, "result_qdrant": search_results}
             result = chain_1.run(inputs)
             st.write(result)
